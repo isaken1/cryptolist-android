@@ -1,4 +1,4 @@
-package com.isaackennedy.cryptolist.ui.notifications;
+package com.isaackennedy.cryptolist.ui.favoritas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,24 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.isaackennedy.cryptolist.R;
-import com.isaackennedy.cryptolist.databinding.FragmentNotificationsBinding;
+import com.isaackennedy.cryptolist.databinding.FragmentFavoritasBinding;
 
-public class NotificationsFragment extends Fragment {
+public class FavoritasFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
-    private FragmentNotificationsBinding binding;
+    private FavoritasViewModel favoritasViewModel;
+    private FragmentFavoritasBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        favoritasViewModel =
+                new ViewModelProvider(this).get(FavoritasViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentFavoritasBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        favoritasViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

@@ -2,16 +2,16 @@ package com.isaackennedy.cryptolist.model;
 
 import java.util.List;
 
-public class Resposta {
+public class RespostaAPI {
     private final String resposta;
     private final String mensagem;
-    private List<Moeda> data;
+    private final List<Moeda> dados;
     private final int type;
 
-    public Resposta(String resposta, String mensagem, List<Moeda> data, int type) {
+    public RespostaAPI(String resposta, String mensagem, List<Moeda> data, int type) {
         this.resposta = resposta;
         this.mensagem = mensagem;
-        this.data = data;
+        this.dados = data;
         this.type = type;
     }
 
@@ -24,7 +24,7 @@ public class Resposta {
     }
 
     public List<Moeda> getData() {
-        return data;
+        return dados;
     }
 
     public int getType() {

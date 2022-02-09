@@ -1,14 +1,14 @@
-package com.isaackennedy.cryptolist.ui.notifications;
+package com.isaackennedy.cryptolist.ui.favoritas;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
+public class FavoritasViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public FavoritasViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
     }
