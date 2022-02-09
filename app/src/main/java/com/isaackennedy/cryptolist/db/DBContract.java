@@ -1,30 +1,39 @@
 package com.isaackennedy.cryptolist.db;
 
-public final class DBConstants {
-    private DBConstants() {};
+import android.provider.BaseColumns;
+
+public final class DBContract {
+    private DBContract() {};
 
     //Infos do BD
-    private static final String DATABASE_NAME = "dbcryptolist";
-    private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "dbcryptolist";
+    public static final int DATABASE_VERSION = 1;
 
-    //Tabela Moeda V1
-    private static final String MOEDA_TABLE_NAME = "moeda";
-    private static final String MOEDA_ID = "_id";
-    private static final String MOEDA_NAME = "nomeMoeda";
-    private static final String MOEDA_URL_IMG = "caminhoImg";
-    private static final String MOEDA_URL = "urlMoeda";
-    private static final String MOEDA_SIMBOLO = "simboloMoeda";
-    private static final String MOEDA_FAVORITADA = "favoritadaMoeda";
+    /* Classe interna para definir o conteúdo da tabela Moeda */
+    public static class TabelaMoeda implements BaseColumns {
+        private TabelaMoeda() {}
+        public static final String TABLE_NAME = "moeda";
+        public static final String NOME = "nomeMoeda";
+        public static final String URL_IMG = "urlImg";
+        public static final String URL = "urlMoeda";
+        public static final String SIMBOLO = "simbolo";
+        public static final String FAVORITADA = "favoritada";
+        public static final String CAMINHO_IMAGEM = "caminhoImagem";
+    }
 
+    //Criação de tabelas
+    public static final String SQL_CRIAR_TABELAS =
+            "CREATE TABLE " + TabelaMoeda.TABLE_NAME + " (" +
+            BaseColumns._ID + "INTEGER PRIMARY KEY, " +
+            TabelaMoeda.NOME + " TEXT, " +
+            TabelaMoeda.URL_IMG + " TEXT, " +
+            TabelaMoeda.URL + " TEXT, " +
+            TabelaMoeda.SIMBOLO + " TEXT, " +
+            TabelaMoeda.FAVORITADA + " BOOLEAN DEFAULT FALSE, " +
+            TabelaMoeda.CAMINHO_IMAGEM + " TEXT)";
 
-    //SQL de criação da tabela moeda
-    private static final String SQL_CRIAR_TABELA_MOEDAS =
-            "CREATE TABLE " + MOEDA_TABLE_NAME + " (" +
-            MOEDA_ID + "INTEGER PRIMARY KEY, " +
-            MOEDA_NAME + " TEXT, " +
-            MOEDA_URL_IMG + " TEXT, " +
-            MOEDA_URL + " TEXT, " +
-            MOEDA_SIMBOLO + " TEXT, " +
-            MOEDA_FAVORITADA + " BOOLEAN DEFAULT FALSE)";
+    //Deleção de tabelas
+    public static final String SQL_DROPAR_TABELAS =
+            "DROP TABLE IF EXISTS " + TabelaMoeda.TABLE_NAME;
 
 }

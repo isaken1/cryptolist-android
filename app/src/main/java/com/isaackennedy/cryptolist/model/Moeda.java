@@ -21,6 +21,16 @@ public class Moeda {
         this.favoritada = false;
     }
 
+    public Moeda(long id, String url, String urlImagem, String nome, String caminhoImagem, String simbolo, boolean favoritada) {
+        this.id = id;
+        this.url = url;
+        this.urlImagem = urlImagem;
+        this.nome = nome;
+        this.caminhoImagem = caminhoImagem;
+        this.simbolo = simbolo;
+        this.favoritada = favoritada;
+    }
+
     public long getId() {
         return id;
     }
