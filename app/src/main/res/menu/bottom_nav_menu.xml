@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_perfil"
+        android:title="@string/title_perfil" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_listagem"
+        android:title="@string/title_listagem" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_favoritas"
+        android:title="@string/title_favoritas" />
+
+</menu>
