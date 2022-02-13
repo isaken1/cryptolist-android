@@ -11,13 +11,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.isaackennedy.cryptolist.adapters.AdapterMod;
 import com.isaackennedy.cryptolist.databinding.FragmentListagemBinding;
+import com.isaackennedy.cryptolist.model.Moeda;
 
 public class ListagemFragment extends Fragment {
 
     private ListagemViewModel listagemViewModel;
     private FragmentListagemBinding binding;
+    private List<Moeda> mMoedas = new ArrayList<Moeda>();
+    RecyclerView rvMoedas;
+    AdapterMod adapterMod;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -11,6 +11,7 @@ public final class DBContract {
 
     /* Classe interna para definir o conteúdo da tabela Moeda */
     public static class TabelaMoeda implements BaseColumns {
+
         private TabelaMoeda() {}
         public static final String TABLE_NAME = "moeda";
         public static final String NOME = "nomeMoeda";
@@ -19,6 +20,15 @@ public final class DBContract {
         public static final String SIMBOLO = "simbolo";
         public static final String FAVORITADA = "favoritada";
         public static final String CAMINHO_IMAGEM = "caminhoImagem";
+        public static final String RANK = "rank";
+    }
+
+    public static class TabelaUsuario implements BaseColumns {
+        private TabelaUsuario() {}
+        public static final String TABLE_NAME = "usuario";
+        public static final String NOME = "nomeUsuario";
+        public static final String EMAIL = "emailUsuario";
+        public static final String NUMERO_MOEDAS_FAVORITADAS = "moedasFavoritadasUsuario";
     }
 
     //Criação de tabelas
@@ -29,8 +39,14 @@ public final class DBContract {
             TabelaMoeda.URL_IMG + " TEXT, " +
             TabelaMoeda.URL + " TEXT, " +
             TabelaMoeda.SIMBOLO + " TEXT, " +
+            TabelaMoeda.RANK + "INTEGER, " +
             TabelaMoeda.FAVORITADA + " BOOLEAN DEFAULT FALSE, " +
-            TabelaMoeda.CAMINHO_IMAGEM + " TEXT)";
+            TabelaMoeda.CAMINHO_IMAGEM + " TEXT);" +
+            "CREATE TABLE " + TabelaUsuario.TABLE_NAME + " (" +
+            BaseColumns._ID + "INTEGER PRIMARY KEY AUTO INCREMENT, " +
+            TabelaUsuario.NOME + " TEXT, " +
+            TabelaUsuario.EMAIL + " TEXT, " +
+            TabelaUsuario.NUMERO_MOEDAS_FAVORITADAS + " INTEGER);";
 
     //Deleção de tabelas
     public static final String SQL_DROPAR_TABELAS =

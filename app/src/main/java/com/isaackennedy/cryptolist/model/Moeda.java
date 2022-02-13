@@ -10,26 +10,25 @@ public class Moeda {
     private String nome;
     private String caminhoImagem;
     private String simbolo;
+    private Integer rank;
     private boolean favoritada;
 
-    public Moeda(long id, String url, String urlImagem, String nome, String simbolo) {
-        this.id = id;
-        this.url = url;
-        this.urlImagem = urlImagem;
-        this.nome = nome;
-        this.simbolo = simbolo;
-        this.favoritada = false;
-    }
+    public Moeda
 
-    public Moeda(long id, String url, String urlImagem, String nome, String caminhoImagem, String simbolo, boolean favoritada) {
+    public Moeda
+
+    public Moeda(long id, String url, String urlImagem, String nome, String caminhoImagem, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
         this.url = url;
         this.urlImagem = urlImagem;
         this.nome = nome;
         this.caminhoImagem = caminhoImagem;
+        this.rank = rank;
         this.simbolo = simbolo;
         this.favoritada = favoritada;
     }
+
+
 
     public long getId() {
         return id;
@@ -85,5 +84,13 @@ public class Moeda {
 
     public void setFavoritada(boolean favoritada) {
         this.favoritada = favoritada;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 }
