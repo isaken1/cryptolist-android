@@ -1,6 +1,8 @@
 package com.isaackennedy.cryptolist.model;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     private Long id;
     private String nome;

@@ -3,8 +3,11 @@ package com.isaackennedy.cryptolist.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isaackennedy.cryptolist.R;
@@ -30,7 +33,13 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull AdapterMod.MinhaViewHolder holder, int position) {
+        Moeda moeda = listaMoedas.get(position);
 
+        holder.tvNome.setText(moeda.getNome());
+        holder.tvRank.setText(Integer.toString(moeda.getRank()));
+        holder.tvSimbolo.setText(moeda.getSimbolo());
+        if(moeda.isFavoritada()) holder.ibFavoriteButton.setImageState(new int[]{1}, true);
+        else holder.ibFavoriteButton.setImageState(new int[]{-1}, true);
     }
 
     @Override
@@ -43,6 +52,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
         TextView tvNome;
         TextView tvSimbolo;
         TextView tvRank;
+        ImageButton ibFavoriteButton;
         CardView cvItem;
 
         public MinhaViewHolder(@NonNull View itemView) {
@@ -51,7 +61,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
             tvNome = itemView.findViewById(R.id.tvNomeRV);
             tvSimbolo = itemView.findViewById(R.id.tvSimboloRV);
             tvRank = itemView.findViewById(R.id.tvRankRV);
-
+            ibFavoriteButton = itemView.findViewById(R.id.ibFavoriteButtonRV);
             cvItem = itemView.findViewById(R.id.cvItem);
 
             cvItem.setOnClickListener(this);

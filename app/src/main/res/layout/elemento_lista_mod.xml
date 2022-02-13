@@ -3,7 +3,7 @@
 <androidx.cardview.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
+    android:layout_margin="1dp"
     app:cardElevation="4dp"
     app:cardCornerRadius="4dp"
     android:id="@+id/cvItem"
@@ -39,16 +39,39 @@
 
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Rank da Moeda"
+                android:gravity="center_vertical"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:id="@+id/tvRankRV"
+                />
+
+            <ImageButton
+                android:id="@+id/ibFavoriteButtonRV"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:src="@android:drawable/btn_star"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="#00ffffff" />
+
+
+
+        </LinearLayout>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Rank da Moeda"
-            android:gravity="start"
-            android:textSize="15sp"
-            android:layout_weight="1"
-            android:id="@+id/tvRankRV"
+            android:src="https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880"
             />
-
 
     </LinearLayout>
 

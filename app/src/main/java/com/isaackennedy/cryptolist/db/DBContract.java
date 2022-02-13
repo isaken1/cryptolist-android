@@ -34,22 +34,26 @@ public final class DBContract {
     //Criação de tabelas
     public static final String SQL_CRIAR_TABELAS =
             "CREATE TABLE " + TabelaMoeda.TABLE_NAME + " (" +
-            BaseColumns._ID + "INTEGER PRIMARY KEY, " +
+            BaseColumns._ID + " INTEGER PRIMARY KEY, " +
             TabelaMoeda.NOME + " TEXT, " +
             TabelaMoeda.URL_IMG + " TEXT, " +
             TabelaMoeda.URL + " TEXT, " +
             TabelaMoeda.SIMBOLO + " TEXT, " +
-            TabelaMoeda.RANK + "INTEGER, " +
+            TabelaMoeda.RANK + " INTEGER, " +
             TabelaMoeda.FAVORITADA + " BOOLEAN DEFAULT FALSE, " +
-            TabelaMoeda.CAMINHO_IMAGEM + " TEXT);" +
+            TabelaMoeda.CAMINHO_IMAGEM + " TEXT);";
+
+
+    public static final String SQL_TABELA_USUARIO =
             "CREATE TABLE " + TabelaUsuario.TABLE_NAME + " (" +
-            BaseColumns._ID + "INTEGER PRIMARY KEY AUTO INCREMENT, " +
-            TabelaUsuario.NOME + " TEXT, " +
-            TabelaUsuario.EMAIL + " TEXT, " +
-            TabelaUsuario.NUMERO_MOEDAS_FAVORITADAS + " INTEGER);";
+                    BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                    TabelaUsuario.NOME + " TEXT, " +
+                    TabelaUsuario.EMAIL + " TEXT, " +
+                    TabelaUsuario.NUMERO_MOEDAS_FAVORITADAS + " INTEGER);";
 
     //Deleção de tabelas
     public static final String SQL_DROPAR_TABELAS =
-            "DROP TABLE IF EXISTS " + TabelaMoeda.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + TabelaMoeda.TABLE_NAME +
+            "DROP TABLE IF EXISTS " + TabelaUsuario.TABLE_NAME;
 
 }

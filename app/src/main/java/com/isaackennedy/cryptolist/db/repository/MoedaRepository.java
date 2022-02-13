@@ -29,6 +29,7 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         cv.put(NOME, entidade.getNome());
         cv.put(URL_IMG, entidade.getUrlImagem());
         cv.put(URL, entidade.getUrl());
+        cv.put(RANK, entidade.getRank());
         cv.put(SIMBOLO, entidade.getSimbolo());
         cv.put(CAMINHO_IMAGEM, entidade.getCaminhoImagem());
 
@@ -44,6 +45,7 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         cv.put(NOME, entidade.getNome());
         cv.put(URL_IMG, entidade.getUrlImagem());
         cv.put(URL, entidade.getUrl());
+        cv.put(RANK, entidade.getRank());
         cv.put(SIMBOLO, entidade.getSimbolo());
         cv.put(CAMINHO_IMAGEM, entidade.getCaminhoImagem());
 
@@ -95,10 +97,11 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         String url = cursor.getString(cursor.getColumnIndexOrThrow(URL));
         String urlImagem = cursor.getString(cursor.getColumnIndexOrThrow(URL_IMG));
         String nome = cursor.getString(cursor.getColumnIndexOrThrow(NOME));
+        Integer rank = cursor.getInt(cursor.getColumnIndexOrThrow(RANK));
         String simbolo = cursor.getString(cursor.getColumnIndexOrThrow(SIMBOLO));
         String caminhoImagem = cursor.getString(cursor.getColumnIndexOrThrow(CAMINHO_IMAGEM));
         boolean favoritada = cursor.getInt(cursor.getColumnIndexOrThrow(FAVORITADA)) > 0;
 
-        return new Moeda(id, url, urlImagem, nome, caminhoImagem, simbolo, favoritada);
+        return new Moeda(id, url, urlImagem, nome, caminhoImagem, rank, simbolo, favoritada);
     }
 }

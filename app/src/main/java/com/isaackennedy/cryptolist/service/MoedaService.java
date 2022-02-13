@@ -13,13 +13,20 @@ import retrofit2.http.Path;
 public interface MoedaService {
 
     @Headers(
-            { "X-CMC_PRO_API_KEY: 187de20b-d1c9-45da-8af0-d7db39c64b79",
+            {
+                    "X-CMC_PRO_API_KEY: 187de20b-d1c9-45da-8af0-d7db39c64b79",
                     "Accepts: 'application/json"
             }
     )
     @GET("/map")
     Call<List<Moeda>> getMoedas();
 
+    @Headers(
+            {
+                    "X-CMC_PRO_API_KEY: 187de20b-d1c9-45da-8af0-d7db39c64b79",
+                    "Accepts: 'application/json"
+            }
+    )
     @GET("/info?id={id}")
     Call<Moeda> getMoedaInfo(@Path("id") int id);
 }
