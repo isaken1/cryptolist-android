@@ -2,6 +2,7 @@ package com.isaackennedy.cryptolist.json;
 
 import android.util.Log;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -28,30 +29,14 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
         List<Moeda> moedasDesserializadas = new ArrayList<>();
 
         try {
-            JsonObject jsonObj = json.getAsJsonObject();
-            JsonObject statusObj = jsonObj.getAsJsonObject("status");
+            JsonArray jsonArr = json.getAsJsonArray();
 
-            if (!statusObj.getAsJsonObject("error_code").isJsonNull()) {
-                throw new JsonParseException("Requisição retornou o seguinte erro de API: "
-                        + statusObj.getAsJsonPrimitive("error_code").getAsInt() + "\n"
-                        + statusObj.getAsJsonPrimitive("error_message").getAsInt());
-            }
-
-            JsonObject data = jsonObj.getAsJsonObject("data");
-            for (String key : data.keySet()) {
-                JsonObject obj = data.get(key).getAsJsonObject();
-                long id = obj.getAsJsonPrimitive("id").getAsLong();
-                String nome = obj.getAsJsonPrimitive("nome").getAsString();
-                String url = null;
-                if (obj.getAsJsonArray("urls").size() > 0) {
-                    url = obj.getAsJsonArray("urls").get(0).getAsString();
-                }
-
-                Integer rank = obj.getAsJsonPrimitive("rank").getAsInt();
-                
-                String urlImagem = obj.getAsJsonPrimitive("logo").getAsString();
+            for (JsonElement el : jsonArr) {
+                JsonObject obj = el.getAsJsonObject();
+                String id = obj.getAsJsonPrimitive("id").getAsString();
+                String nome = obj.getAsJsonPrimitive("name").getAsString();
                 String simbolo = obj.getAsJsonPrimitive("symbol").getAsString();
-                moedasDesserializadas.add(new Moeda(id, nome, rank, nome));
+                moedasDesserializadas.add(new Moeda(id, nome, simbolo));
             }
 
         } catch (JsonParseException ex) {

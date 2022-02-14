@@ -21,6 +21,9 @@ public final class DBContract {
         public static final String FAVORITADA = "favoritada";
         public static final String CAMINHO_IMAGEM = "caminhoImagem";
         public static final String RANK = "rank";
+
+        public static final String PRECO = "preco";
+        public static final String ULTIMA_ATUALIZACAO = "ultimaAtualizacao";
     }
 
     public static class TabelaUsuario implements BaseColumns {
@@ -34,14 +37,16 @@ public final class DBContract {
     //Criação de tabelas
     public static final String SQL_CRIAR_TABELAS =
             "CREATE TABLE " + TabelaMoeda.TABLE_NAME + " (" +
-            BaseColumns._ID + " INTEGER PRIMARY KEY, " +
+            BaseColumns._ID + " TEXT PRIMARY KEY, " +
             TabelaMoeda.NOME + " TEXT, " +
             TabelaMoeda.URL_IMG + " TEXT, " +
             TabelaMoeda.URL + " TEXT, " +
             TabelaMoeda.SIMBOLO + " TEXT, " +
             TabelaMoeda.RANK + " INTEGER, " +
             TabelaMoeda.FAVORITADA + " BOOLEAN DEFAULT FALSE, " +
-            TabelaMoeda.CAMINHO_IMAGEM + " TEXT);";
+            TabelaMoeda.CAMINHO_IMAGEM + " TEXT," +
+            TabelaMoeda.PRECO + " REAL, " +
+            TabelaMoeda.ULTIMA_ATUALIZACAO + " TEXT);";
 
 
     public static final String SQL_TABELA_USUARIO =

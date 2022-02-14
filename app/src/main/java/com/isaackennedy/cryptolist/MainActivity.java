@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.gson.JsonElement;
 import com.isaackennedy.cryptolist.databinding.ActivityMainBinding;
+import com.isaackennedy.cryptolist.model.Moeda;
 import com.isaackennedy.cryptolist.json.ListagemGeralDeserialiazer;
 import com.isaackennedy.cryptolist.model.Moeda;
 import com.isaackennedy.cryptolist.ui.listagem.ListagemFragment;
@@ -42,6 +43,8 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity implements ListagemFragment.AoClicarNaMoedaMod {
 
     private ActivityMainBinding binding;
+
+    public List<Moeda> moedas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,108 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+//        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+//
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    class ListaAsyncTask extends AsyncTask<String, Void, String> {
+
+        private Context context;
+
+        public ListaAsyncTask(Context context){
+            this.context = context;
+        }
+
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings){
+
+            String stringUrl = strings[0];
+
+            InputStream inputStream = null;
+            InputStreamReader inputStreamReader = null;
+
+            StringBuffer buffer = null;
+
+            int code;
+
+            try{
+                URL url = new URL(stringUrl);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("X-CMC_PRO_API_KEY", "187de20b-d1c9-45da-8af0-d7db39c64b79");
+                connection.setRequestProperty("Accepts", "application/json");
+
+                inputStream = connection.getInputStream();
+
+                code = connection.getResponseCode();
+
+                Toast.makeText(context, "Code: "+ code, Toast.LENGTH_SHORT).show();
+
+                inputStreamReader = new InputStreamReader(inputStream);
+
+                BufferedReader reader = new BufferedReader(inputStreamReader);
+
+                buffer = new StringBuffer();
+
+                String linha = "";
+
+                while((linha = reader.readLine()) != null){
+                    buffer.append(linha);
+                }
+
+            }catch(MalformedURLException e){
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+            return buffer.toString();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values){
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String resultado){
+
+            super.onPostExecute(resultado);
+
+            try {
+                JSONObject jsonElement = new JSONObject(resultado);
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+                //pra onde deve retornar??
+        }
+
+
+
     public void clicouNaMoedaMod(Moeda moeda) {
         Intent it = new Intent(this, MoedaDetalheActivity.class);
         
@@ -90,6 +195,5 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
 
         it.putExtra("moeda", moeda);
         startActivity(it);
-
     }
 }

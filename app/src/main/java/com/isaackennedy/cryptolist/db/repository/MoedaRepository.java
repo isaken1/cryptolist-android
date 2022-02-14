@@ -11,6 +11,7 @@ import com.isaackennedy.cryptolist.model.Moeda;
 
 import static com.isaackennedy.cryptolist.db.DBContract.TabelaMoeda.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         cv.put(RANK, entidade.getRank());
         cv.put(SIMBOLO, entidade.getSimbolo());
         cv.put(CAMINHO_IMAGEM, entidade.getCaminhoImagem());
+        cv.put(PRECO, entidade.getPreco());
+        cv.put(FAVORITADA, entidade.isFavoritada());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+        cv.put(ULTIMA_ATUALIZACAO, entidade.getUltimaAtualizacao().format(formatter));
 
         db.insert(TABLE_NAME, null, cv);
     }
@@ -48,6 +53,10 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         cv.put(RANK, entidade.getRank());
         cv.put(SIMBOLO, entidade.getSimbolo());
         cv.put(CAMINHO_IMAGEM, entidade.getCaminhoImagem());
+        cv.put(PRECO, entidade.getPreco());
+        cv.put(FAVORITADA, entidade.isFavoritada());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+        cv.put(ULTIMA_ATUALIZACAO, entidade.getUltimaAtualizacao().format(formatter));
 
         String selection = _ID + " = ?";
         String[] selectionArgs = { String.valueOf(entidade.getId()) };
@@ -93,7 +102,7 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
     @Override
     public Moeda entityFromCursor(Cursor cursor) {
 
-        long id = cursor.getLong(cursor.getColumnIndexOrThrow(_ID));
+        String id = cursor.getString(cursor.getColumnIndexOrThrow(_ID));
         String url = cursor.getString(cursor.getColumnIndexOrThrow(URL));
         String urlImagem = cursor.getString(cursor.getColumnIndexOrThrow(URL_IMG));
         String nome = cursor.getString(cursor.getColumnIndexOrThrow(NOME));
