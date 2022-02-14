@@ -2,6 +2,7 @@ package com.isaackennedy.cryptolist.json;
 
 import android.util.Log;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -19,7 +20,7 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
 
     @Override
     public List<Moeda> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        if (json.isJsonNull() || !json.isJsonObject()) {
+        if (json.isJsonNull()) {
             String errorMessage = "Json nulo ou inválido.";
             Log.e(LOG_TAG, errorMessage);
             throw new JsonParseException(errorMessage);
@@ -28,28 +29,14 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
         List<Moeda> moedasDesserializadas = new ArrayList<>();
 
         try {
-            JsonObject jsonObj = json.getAsJsonObject();
-            JsonObject statusObj = jsonObj.getAsJsonObject("status");
+            JsonArray jsonArr = json.getAsJsonArray();
 
-            if (!statusObj.getAsJsonObject("error_code").isJsonNull()) {
-                throw new JsonParseException("Requisição retornou o seguinte erro de API: "
-                        + statusObj.getAsJsonPrimitive("error_code").getAsInt() + "\n"
-                        + statusObj.getAsJsonPrimitive("error_message").getAsInt());
-            }
-
-            JsonObject data = jsonObj.getAsJsonObject("data");
-            for (String key : data.keySet()) {
-                JsonObject obj = data.get(key).getAsJsonObject();
-                long id = obj.getAsJsonPrimitive("id").getAsLong();
-                String nome = obj.getAsJsonPrimitive("nome").getAsString();
-                String url = null;
-                if (obj.getAsJsonArray("urls").size() > 0) {
-                    url = obj.getAsJsonArray("urls").get(0).getAsString();
-                }
-
-                String urlImagem = obj.getAsJsonPrimitive("logo").getAsString();
+            for (JsonElement el : jsonArr) {
+                JsonObject obj = el.getAsJsonObject();
+                String id = obj.getAsJsonPrimitive("id").getAsString();
+                String nome = obj.getAsJsonPrimitive("name").getAsString();
                 String simbolo = obj.getAsJsonPrimitive("symbol").getAsString();
-                moedasDesserializadas.add(new Moeda(id, url, urlImagem, nome, simbolo));
+                moedasDesserializadas.add(new Moeda(id, nome, simbolo));
             }
 
         } catch (JsonParseException ex) {
