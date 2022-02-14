@@ -20,7 +20,7 @@ import com.isaackennedy.cryptolist.R;
 import com.isaackennedy.cryptolist.adapters.AdapterMod;
 import com.isaackennedy.cryptolist.databinding.FragmentListagemBinding;
 import com.isaackennedy.cryptolist.model.Moeda;
-import com.isaackennedy.cryptolist.service.MoedaService;
+import com.isaackennedy.cryptolist.service.retrofit.MoedaService;
 
 import java.util.ArrayList;
 import java.util.List;
