@@ -38,6 +38,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements ListagemFragment.AoClicarNaMoedaMod {
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
         NavigationUI.setupWithNavController(binding.navView, navController);
 
 
-
     }
 
     @Override
@@ -80,23 +80,6 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-//        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
-//
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//
-
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -107,18 +90,18 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
 
         private Context context;
 
-        public ListaAsyncTask(Context context){
+        public ListaAsyncTask(Context context) {
             this.context = context;
         }
 
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected String doInBackground(String... strings){
+        protected String doInBackground(String... strings) {
 
             String stringUrl = strings[0];
 
@@ -129,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
 
             int code;
 
-            try{
+            try {
                 URL url = new URL(stringUrl);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -140,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
 
                 code = connection.getResponseCode();
 
-                Toast.makeText(context, "Code: "+ code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Code: " + code, Toast.LENGTH_SHORT).show();
 
                 inputStreamReader = new InputStreamReader(inputStream);
 
@@ -150,13 +133,13 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
 
                 String linha = "";
 
-                while((linha = reader.readLine()) != null){
+                while ((linha = reader.readLine()) != null) {
                     buffer.append(linha);
                 }
 
-            }catch(MalformedURLException e){
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            }catch(IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -164,12 +147,12 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
         }
 
         @Override
-        protected void onProgressUpdate(Void... values){
+        protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
 
         @Override
-        protected void onPostExecute(String resultado){
+        protected void onPostExecute(String resultado) {
 
             super.onPostExecute(resultado);
 
@@ -177,20 +160,18 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
                 JSONObject jsonElement = new JSONObject(resultado);
 
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
 
-                //pra onde deve retornar??
+            //pra onde deve retornar??
         }
-
+    }
 
 
     public void clicouNaMoedaMod(Moeda moeda) {
         Intent it = new Intent(this, MoedaDetalheActivity.class);
-        
 
 
         it.putExtra("moeda", moeda);
