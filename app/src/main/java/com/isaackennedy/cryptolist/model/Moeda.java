@@ -21,17 +21,6 @@ public class Moeda implements Serializable {
 
     public Moeda() {}
 
-
-    public Moeda(long id, String nome, Integer rank, String simbolo, boolean favoritada) {
-        this.id = id;
-        this.url = " ";
-        this.urlImagem = " ";
-        this.nome = nome;
-        this.caminhoImagem = " ";
-        this.rank = rank;
-        this.simbolo = simbolo;
-    }
-
     public Moeda(String id, String nome, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
         this.url = " ";
@@ -43,7 +32,7 @@ public class Moeda implements Serializable {
         this.favoritada = favoritada;
     }
 
-    public Moeda(long id, String url, String urlImagem, String nome, String caminhoImagem, Integer rank, String simbolo, boolean favoritada) {
+    public Moeda(String id, String url, String urlImagem, String nome, String caminhoImagem, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
         this.url = url;
         this.urlImagem = urlImagem;
@@ -61,6 +50,19 @@ public class Moeda implements Serializable {
         this.nome = nome;
         this.simbolo = simbolo;
         this.rank = rank;
+        this.preco = preco;
+        this.ultimaAtualizacao = ultimaAtualizacao;
+    }
+
+    public Moeda(String id, String url, String urlImagem, String nome, String caminhoImagem, String simbolo, Integer rank, boolean favoritada, float preco, ZonedDateTime ultimaAtualizacao) {
+        this.id = id;
+        this.url = url;
+        this.urlImagem = urlImagem;
+        this.nome = nome;
+        this.caminhoImagem = caminhoImagem;
+        this.simbolo = simbolo;
+        this.rank = rank;
+        this.favoritada = favoritada;
         this.preco = preco;
         this.ultimaAtualizacao = ultimaAtualizacao;
     }

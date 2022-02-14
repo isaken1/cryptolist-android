@@ -68,7 +68,7 @@ public class MoedaDetalheFragment extends Fragment {
         if(mMoeda != null) {
             tvNome.setText(mMoeda.getId());
             tvSimbolo.setText(mMoeda.getSimbolo());
-            tvPreco.setText(Float.toString(mMoeda.getPreco));
+            tvPreco.setText(Float.toString(mMoeda.getPreco()));
         }
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");

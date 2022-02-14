@@ -11,6 +11,7 @@ import com.isaackennedy.cryptolist.model.Moeda;
 
 import static com.isaackennedy.cryptolist.db.DBContract.TabelaMoeda.*;
 
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,13 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
         String simbolo = cursor.getString(cursor.getColumnIndexOrThrow(SIMBOLO));
         String caminhoImagem = cursor.getString(cursor.getColumnIndexOrThrow(CAMINHO_IMAGEM));
         boolean favoritada = cursor.getInt(cursor.getColumnIndexOrThrow(FAVORITADA)) > 0;
+        float preco = cursor.getFloat(cursor.getColumnIndexOrThrow(PRECO));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss Z");
+        ZonedDateTime ultimaAtualizacao = ZonedDateTime.parse(cursor
+                        .getString(cursor.getColumnIndexOrThrow(ULTIMA_ATUALIZACAO)),
+                        formatter);
 
-        return new Moeda(id, url, urlImagem, nome, caminhoImagem, rank, simbolo, favoritada);
+
+        return new Moeda(id, url, urlImagem, nome, caminhoImagem, simbolo, rank, favoritada, preco, ultimaAtualizacao);
     }
 }
