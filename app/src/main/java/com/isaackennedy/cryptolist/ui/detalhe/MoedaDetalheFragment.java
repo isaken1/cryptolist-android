@@ -13,9 +13,18 @@ import android.widget.TextView;
 
 import com.isaackennedy.cryptolist.R;
 import com.isaackennedy.cryptolist.model.Moeda;
+import com.isaackennedy.cryptolist.service.retrofit.CoinDetailInitializer;
+import com.isaackennedy.cryptolist.service.retrofit.MoedaDetalheService;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MoedaDetalheFragment extends Fragment {
@@ -35,6 +44,7 @@ public class MoedaDetalheFragment extends Fragment {
     }
 
     public static MoedaDetalheFragment novaInstancia(Moeda moeda) {
+
         MoedaDetalheFragment fragment = new MoedaDetalheFragment();
 
         Bundle params = new Bundle();
@@ -58,6 +68,31 @@ public class MoedaDetalheFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+//        Moeda[] m = new Moeda[1];
+
+        MoedaDetalheService service = new CoinDetailInitializer().coinDetailService() ;
+
+        Call<Moeda> chamada = service.getDetalhesMoeda(mMoeda.getId());
+
+        chamada.enqueue(new Callback<Moeda>(){
+
+            @Override
+            public void onResponse(Call<Moeda> call, Response<Moeda> response){
+
+                mMoeda = response.body();
+
+//                rvMoedas.notify();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Moeda> call, Throwable t){
+
+            }
+        });
+
+
         View layout = inflater.inflate(R.layout.fragment_moeda_detalhe, container, false);
 
         tvNome = layout.findViewById(R.id.tvNome);
@@ -66,15 +101,19 @@ public class MoedaDetalheFragment extends Fragment {
         tvData = layout.findViewById(R.id.tvData);
 
         if(mMoeda != null) {
-            tvNome.setText(mMoeda.getId());
+            tvNome.setText(mMoeda.getNome());
             tvSimbolo.setText(mMoeda.getSimbolo());
             tvPreco.setText(Float.toString(mMoeda.getPreco()));
         }
 
+        Instant now = Instant.now();
+        ZoneId zone = ZoneId.of("America/Recife");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime zonedNow = ZonedDateTime.ofInstant(now, zone);
 
-        tvData.setText("Última vez atualizado em " + dtf.format(now));
+        String data = "Última vez atualizado em " + dtf.format(zonedNow);
+
+        tvData.setText(data);
 
         return layout;
     }

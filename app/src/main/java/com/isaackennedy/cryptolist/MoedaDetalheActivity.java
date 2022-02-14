@@ -20,8 +20,10 @@ public class MoedaDetalheActivity extends AppCompatActivity {
         Intent it = getIntent();
 
         //Recupera o dado que veio na intent
-        Moeda moeda = (Moeda) it.getExtras().getSerializable("filme");
-        
+        Moeda moeda = (Moeda) it.getExtras().getSerializable("moeda");
+
+
+
 
         MoedaDetalheFragment moedaDetalheFragment = MoedaDetalheFragment.novaInstancia(moeda);
 

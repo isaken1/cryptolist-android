@@ -1,5 +1,6 @@
 package com.isaackennedy.cryptolist.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.isaackennedy.cryptolist.R;
+import com.isaackennedy.cryptolist.db.repository.MoedaRepository;
 import com.isaackennedy.cryptolist.model.Moeda;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
     @Override
     public void onBindViewHolder(@NonNull AdapterMod.MinhaViewHolder holder, int position) {
         Moeda moeda = listaMoedas.get(position);
-
+        holder.cvItem.setTag(position);
         holder.tvNome.setText(moeda.getNome());
 //        holder.tvRank.setText(Integer.toString(moeda.getRank()));
         holder.tvSimbolo.setText(moeda.getSimbolo());
@@ -62,9 +64,11 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
             tvSimbolo = itemView.findViewById(R.id.tvSimboloRV);
 //            tvRank = itemView.findViewById(R.id.tvRankRV);
             ibFavoriteButton = itemView.findViewById(R.id.ibFavoriteButtonRV);
+
             cvItem = itemView.findViewById(R.id.cvItem);
 
             cvItem.setOnClickListener(this);
+
         }
 
         @Override

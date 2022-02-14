@@ -20,7 +20,7 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
 
     @Override
     public List<Moeda> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        if (json.isJsonNull() || !json.isJsonObject()) {
+        if (json.isJsonNull()) {
             String errorMessage = "Json nulo ou inválido.";
             Log.e(LOG_TAG, errorMessage);
             throw new JsonParseException(errorMessage);

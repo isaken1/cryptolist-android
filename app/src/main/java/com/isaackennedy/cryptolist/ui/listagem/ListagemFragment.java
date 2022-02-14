@@ -20,6 +20,7 @@ import com.isaackennedy.cryptolist.R;
 import com.isaackennedy.cryptolist.adapters.AdapterMod;
 import com.isaackennedy.cryptolist.databinding.FragmentListagemBinding;
 import com.isaackennedy.cryptolist.model.Moeda;
+import com.isaackennedy.cryptolist.service.retrofit.CoinListInitializer;
 import com.isaackennedy.cryptolist.service.retrofit.MoedaService;
 
 import java.util.ArrayList;
@@ -39,16 +40,16 @@ public class ListagemFragment extends Fragment {
     RecyclerView rvMoedas;
     AdapterMod adapterMod;
 
-    private Retrofit retrofit;
+//    private Retrofit retrofit;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.coingecko.com/api/v3/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+//        retrofit = new Retrofit.Builder()
+//            .baseUrl("https://api.coingecko.com/api/v3/coins/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build();
 
         View layout = inflater.inflate(R.layout.fragment_listagem, container, false);
 
@@ -102,10 +103,10 @@ public class ListagemFragment extends Fragment {
     private List<Moeda> carregaMoedas() {
         List<Moeda> moedas = new ArrayList<>();
 
-//         moedas.add(new Moeda(1L, "bitcoin", 1, "BTC", true));
-//         moedas.add(new Moeda(2L, "gabodes", 2, "GBS", false));
+//        moedas.add(new Moeda("1", "bitcoin", 1, "BTC", true));
+//        moedas.add(new Moeda("2L", "gabodes", 2, "GBS", false));
 
-        MoedaService service = retrofit.create(MoedaService.class);
+        MoedaService service = new CoinListInitializer().coinListService() ;
 
         Call<List<Moeda>> chamada = service.getMoedas();
 
@@ -116,9 +117,10 @@ public class ListagemFragment extends Fragment {
                 if(response.isSuccessful()){
                     for(int i = 0; i < response.body().toArray().length; i++){
                         moedas.add(response.body().get(i));
-                        
                     }
                 }
+
+                adapterMod.notifyDataSetChanged();
             }
 
             @Override

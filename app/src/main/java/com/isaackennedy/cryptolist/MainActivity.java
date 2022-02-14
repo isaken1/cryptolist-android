@@ -25,6 +25,10 @@ import com.isaackennedy.cryptolist.databinding.ActivityMainBinding;
 import com.isaackennedy.cryptolist.model.Moeda;
 import com.isaackennedy.cryptolist.json.ListagemGeralDeserialiazer;
 import com.isaackennedy.cryptolist.model.Moeda;
+import com.isaackennedy.cryptolist.service.retrofit.CoinDetailInitializer;
+import com.isaackennedy.cryptolist.service.retrofit.CoinListInitializer;
+import com.isaackennedy.cryptolist.service.retrofit.MoedaDetalheService;
+import com.isaackennedy.cryptolist.service.retrofit.MoedaService;
 import com.isaackennedy.cryptolist.ui.listagem.ListagemFragment;
 
 import org.json.JSONException;
@@ -39,6 +43,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity implements ListagemFragment.AoClicarNaMoedaMod {
@@ -86,95 +93,36 @@ public class MainActivity extends AppCompatActivity implements ListagemFragment.
         return super.onOptionsItemSelected(item);
     }
 
-    class ListaAsyncTask extends AsyncTask<String, Void, String> {
-
-        private Context context;
-
-        public ListaAsyncTask(Context context) {
-            this.context = context;
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            String stringUrl = strings[0];
-
-            InputStream inputStream = null;
-            InputStreamReader inputStreamReader = null;
-
-            StringBuffer buffer = null;
-
-            int code;
-
-            try {
-                URL url = new URL(stringUrl);
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestProperty("X-CMC_PRO_API_KEY", "187de20b-d1c9-45da-8af0-d7db39c64b79");
-                connection.setRequestProperty("Accepts", "application/json");
-
-                inputStream = connection.getInputStream();
-
-                code = connection.getResponseCode();
-
-                Toast.makeText(context, "Code: " + code, Toast.LENGTH_SHORT).show();
-
-                inputStreamReader = new InputStreamReader(inputStream);
-
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-
-                buffer = new StringBuffer();
-
-                String linha = "";
-
-                while ((linha = reader.readLine()) != null) {
-                    buffer.append(linha);
-                }
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return buffer.toString();
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-
-            super.onPostExecute(resultado);
-
-            try {
-                JSONObject jsonElement = new JSONObject(resultado);
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-            //pra onde deve retornar??
-        }
-    }
-
 
     public void clicouNaMoedaMod(Moeda moeda) {
         Intent it = new Intent(this, MoedaDetalheActivity.class);
 
+//        Moeda[] m = new Moeda[1];
+
+//        MoedaDetalheService service = new CoinDetailInitializer().coinDetailService() ;
+//
+//        Call<Moeda> chamada = service.getDetalhesMoeda(moeda.getId());
+//
+//        chamada.enqueue(new Callback<Moeda>(){
+//
+//            @Override
+//            public void onResponse(Call<Moeda> call, Response<Moeda> response){
+//
+//                m[0] = response.body();
+//
+////                rvMoedas.notify();
+//
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Moeda> call, Throwable t){
+//
+//            }
+//        });
 
         it.putExtra("moeda", moeda);
         startActivity(it);
+
     }
 }
