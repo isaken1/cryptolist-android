@@ -21,6 +21,7 @@ public final class DBContract {
         public static final String FAVORITADA = "favoritada";
         public static final String CAMINHO_IMAGEM = "caminhoImagem";
         public static final String RANK = "rank";
+
         public static final String PRECO = "preco";
         public static final String ULTIMA_ATUALIZACAO = "ultimaAtualizacao";
     }

@@ -8,7 +8,6 @@ import java.time.ZonedDateTime;
  */
 public class Moeda implements Serializable {
 
-
     private String id;
     private String url;
     private String urlImagem;
@@ -22,9 +21,14 @@ public class Moeda implements Serializable {
 
     public Moeda() {}
 
-    public Moeda(String id, String nome, String simbolo) {
+
+    public Moeda(long id, String nome, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
+        this.url = " ";
+        this.urlImagem = " ";
         this.nome = nome;
+        this.caminhoImagem = " ";
+        this.rank = rank;
         this.simbolo = simbolo;
     }
 
@@ -39,7 +43,7 @@ public class Moeda implements Serializable {
         this.favoritada = favoritada;
     }
 
-    public Moeda(String id, String url, String urlImagem, String nome, String caminhoImagem, Integer rank, String simbolo, boolean favoritada) {
+    public Moeda(long id, String url, String urlImagem, String nome, String caminhoImagem, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
         this.url = url;
         this.urlImagem = urlImagem;

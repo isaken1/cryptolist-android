@@ -35,7 +35,6 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
                 JsonObject obj = el.getAsJsonObject();
                 String id = obj.getAsJsonPrimitive("id").getAsString();
                 String nome = obj.getAsJsonPrimitive("name").getAsString();
-
                 String simbolo = obj.getAsJsonPrimitive("symbol").getAsString();
                 moedasDesserializadas.add(new Moeda(id, nome, simbolo));
             }

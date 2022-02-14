@@ -14,6 +14,7 @@ public class CryptoListSQLHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DBContract.SQL_CRIAR_TABELAS);
+        db.execSQL(DBContract.SQL_TABELA_USUARIO);
     }
 
     /* Por simplicidade, ao fazer atualização ou reverter uma versão do banco, simplesmente
