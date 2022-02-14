@@ -21,6 +21,12 @@ public class Moeda implements Serializable {
 
     public Moeda() {}
 
+    public Moeda(String id, String nome, String simbolo) {
+        this.id = id;
+        this.nome = nome;
+        this.simbolo = simbolo;
+    }
+
     public Moeda(String id, String nome, Integer rank, String simbolo, boolean favoritada) {
         this.id = id;
         this.url = " ";
