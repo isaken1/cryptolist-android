@@ -51,7 +51,7 @@ public class ListagemGeralDeserialiazer implements JsonDeserializer<List<Moeda>>
                 
                 String urlImagem = obj.getAsJsonPrimitive("logo").getAsString();
                 String simbolo = obj.getAsJsonPrimitive("symbol").getAsString();
-                moedasDesserializadas.add(new Moeda(id, url, , nome, ));
+                moedasDesserializadas.add(new Moeda(id, nome, rank, nome));
             }
 
         } catch (JsonParseException ex) {

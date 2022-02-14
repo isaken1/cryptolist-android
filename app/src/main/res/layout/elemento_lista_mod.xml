@@ -44,15 +44,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Rank da Moeda"
-                android:gravity="center_vertical"
-                android:textSize="15sp"
-                android:layout_weight="1"
-                android:id="@+id/tvRankRV"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Rank da Moeda"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:textSize="15sp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:id="@+id/tvRankRV"-->
+<!--                />-->
 
             <ImageButton
                 android:id="@+id/ibFavoriteButtonRV"
@@ -67,11 +67,7 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="https://assets.coingecko.com/coins/images/279/thumb/ethereum.png?1595348880"
-            />
+        
 
     </LinearLayout>
 

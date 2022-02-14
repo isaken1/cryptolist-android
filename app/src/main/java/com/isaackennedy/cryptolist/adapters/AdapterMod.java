@@ -36,7 +36,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
         Moeda moeda = listaMoedas.get(position);
 
         holder.tvNome.setText(moeda.getNome());
-        holder.tvRank.setText(Integer.toString(moeda.getRank()));
+//        holder.tvRank.setText(Integer.toString(moeda.getRank()));
         holder.tvSimbolo.setText(moeda.getSimbolo());
         if(moeda.isFavoritada()) holder.ibFavoriteButton.setImageState(new int[]{1}, true);
         else holder.ibFavoriteButton.setImageState(new int[]{-1}, true);
@@ -51,7 +51,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
 
         TextView tvNome;
         TextView tvSimbolo;
-        TextView tvRank;
+//        TextView tvRank;
         ImageButton ibFavoriteButton;
         CardView cvItem;
 
@@ -60,7 +60,7 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
 
             tvNome = itemView.findViewById(R.id.tvNomeRV);
             tvSimbolo = itemView.findViewById(R.id.tvSimboloRV);
-            tvRank = itemView.findViewById(R.id.tvRankRV);
+//            tvRank = itemView.findViewById(R.id.tvRankRV);
             ibFavoriteButton = itemView.findViewById(R.id.ibFavoriteButtonRV);
             cvItem = itemView.findViewById(R.id.cvItem);
 
@@ -69,8 +69,18 @@ public class AdapterMod extends RecyclerView.Adapter<AdapterMod.MinhaViewHolder>
 
         @Override
         public void onClick(View v) {
-            
+            listener.clicouNoElemento(getLayoutPosition());
         }
+    }
+
+    public interface AoClicarNaLista {
+        void clicouNoElemento(int position);
+    }
+
+    private AoClicarNaLista listener;
+
+    public void implementaAoClicarNaLista(AoClicarNaLista listener){
+        this.listener = listener;
     }
 
 

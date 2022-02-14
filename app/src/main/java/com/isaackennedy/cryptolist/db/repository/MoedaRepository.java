@@ -18,7 +18,7 @@ public class MoedaRepository implements CryptoListRepository<Moeda> {
 
     private final CryptoListSQLHelper dbHelper;
 
-    MoedaRepository(Context context) { this.dbHelper = new CryptoListSQLHelper(context); }
+    public MoedaRepository(Context context) { this.dbHelper = new CryptoListSQLHelper(context); }
 
     @Override
     public void inserir(Moeda entidade) {

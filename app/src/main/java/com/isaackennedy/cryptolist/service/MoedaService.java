@@ -18,7 +18,7 @@ public interface MoedaService {
                     "Accepts: 'application/json"
             }
     )
-    @GET("/map")
+    @GET("/coins/list")
     Call<List<Moeda>> getMoedas();
 
     @Headers(
